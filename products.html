@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowCraft | All Products</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">GlowCraft</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-icons">
+      <a href="products.html"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="wishlist-compare.html"><i class="fa-regular fa-heart"></i></a>
+      <a href="cart.html" class="cart-icon"><i class="fa-solid fa-bag-shopping"></i> <span id="cart-count">0</span></a>
+      <a href="profile.html"><i class="fa-regular fa-user"></i></a>
+    </div>
+  </header>
+
+  <!-- Header Banner -->
+  <section class="container">
+    <div class="products-header-banner">
+      <div class="banner-text">
+        <h1>Egyptian Skincare Products</h1>
+        <p>Explore top Egyptian therapeutic skincare brands for all skin types</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <div class="container products-layout">
+    
+    <!-- Left Sidebar Filter -->
+    <aside class="filters-sidebar">
+      <div class="filter-header">
+        <h3><i class="fa-solid fa-sliders"></i> Filter</h3>
+      </div>
+      
+      <!-- Skin Type Filter -->
+      <div class="filter-group">
+        <h4>Skin Type</h4>
+        <label><input type="checkbox" value="Oily" class="filter-skin"> Oily</label>
+        <label><input type="checkbox" value="Dry" class="filter-skin"> Dry</label>
+        <label><input type="checkbox" value="Combination" class="filter-skin"> Combination</label>
+        <label><input type="checkbox" value="Sensitive" class="filter-skin"> Sensitive</label>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-group">
+        <h4>Category</h4>
+        <label><input type="checkbox" value="Cleansers" class="filter-cat"> Cleansers</label>
+        <label><input type="checkbox" value="Serums" class="filter-cat"> Serums</label>
+        <label><input type="checkbox" value="Moisturizers" class="filter-cat"> Moisturizers</label>
+        <label><input type="checkbox" value="Sunscreens" class="filter-cat"> Sunscreens</label>
+        <label><input type="checkbox" value="Masks" class="filter-cat"> Masks</label>
+      </div>
+
+      <!-- Price Range Filter (بالجنيه المصري EGP) -->
+      <div class="filter-group">
+        <h4>Price Range</h4>
+        <input type="range" id="price-range" min="30" max="500" value="500">
+        <div class="price-labels">
+          <span>30 EGP</span>
+          <span id="price-val">500 EGP</span>
+        </div>
+      </div>
+
+      <!-- Sort By Filter -->
+      <div class="filter-group">
+        <h4>Sort By</h4>
+        <select id="sidebar-sort-select" class="custom-select">
+          <option value="latest">Latest</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+    </aside>
+
+    <!-- Right Side Products Area -->
+    <main class="products-main">
+      
+      <!-- Top Search Bar -->
+      <div class="search-bar-wrap">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" placeholder="Search Egyptian therapeutic skincare...">
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="all-products-grid">
+        <p class="loading-state">Loading products...</p>
+      </div>
+
+      <!-- Pagination Bar -->
+      <div class="pagination-container">
+        <div class="pagination-buttons" id="pagination-btns"></div>
+        <span class="showing-count" id="showing-text">Loading...</span>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowCraft | Skin Quiz Result</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #fbf9f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2d3748; margin: 0; }
+    .quiz-container { max-width: 700px; margin: 50px auto; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+    .quiz-container h1 { font-size: 28px; margin-bottom: 10px; color: #3b5343; }
+    .quiz-container p { color: #718096; margin-bottom: 30px; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+    .option-btn { padding: 15px; border: 2px solid #e2e8f0; border-radius: 10px; background: #fdfbf7; font-weight: 600; cursor: pointer; transition: all 0.2s; font-size: 14px; color: #2d3748; }
+    .option-btn:hover { border-color: #3b5343; background: #f0e9dc; }
+    
+    /* تنسيق صفحة الروتين التي ستظهر عند الاختيار */
+    #routine-result { display: none; text-align: left; background: #f7f5f0; padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2dcd2; }
+    #routine-result h3 { color: #3b5343; margin-top: 0; margin-bottom: 15px; font-size: 20px; }
+    .routine-step { margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
+    .routine-step strong { color: #2d3748; }
+    
+    .back-home { display: inline-block; margin-top: 20px; color: #3b5343; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div id="quiz-box">
+      <h1>Skin Type Quiz</h1>
+      <p>Let's find out what your skin needs for a natural glow.</p>
+      
+      <h3 style="margin-bottom: 20px; font-size: 18px;">How does your skin feel after washing?</h3>
+      <div class="options-grid">
+        <button class="option-btn" onclick="showRoutine('dry')">Very tight or dry</button>
+        <button class="option-btn" onclick="showRoutine('oily')">Shiny and oily</button>
+        <button class="option-btn" onclick="showRoutine('combination')">Oily in T-zone, dry elsewhere</button>
+        <button class="option-btn" onclick="showRoutine('balanced')">Balanced and comfortable</button>
+      </div>
+    </div>
+
+    <!-- صندوق عرض الروتين -->
+    <div id="routine-result">
+      <h3 id="routine-title">Your Custom Skincare Routine</h3>
+      <div id="routine-content"></div>
+      <button onclick="resetQuiz()" class="btn-dark" style="margin-top: 20px; padding: 8px 20px; background-color: #3b5343; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Retake Quiz</button>
+    </div>
+
+    <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+  <script>
+    function showRoutine(type) {
+      // إخفاء أسئلة الاختبار
+      document.getElementById('quiz-box').style.display = 'none';
+      
+      // إظهار صندوق النتيجة
+      const resultBox = document.getElementById('routine-result');
+      resultBox.style.display = 'block';
+      
+      const titleElem = document.getElementById('routine-title');
+      const contentElem = document.getElementById('routine-content');
+      
+      let htmlContent = '';
+      
+      if (type === 'dry') {
+        titleElem.innerText = "Routine for Dry Skin 💧";
+        htmlContent = `
+          <div class="routine-step"><strong>1. Cleanser:</strong> Use a hydrating, gentle milk or cream cleanser.</div>
+          <div class="routine-step"><strong>2. Serum:</strong> Hyaluronic Acid serum to lock in deep moisture.</div>
+          <div class="routine-step"><strong>3. Moisturizer:</strong> Rich barrier-repair cream containing ceramides.</div>
+          <div class="routine-step"><strong>4. Sunscreen:</strong> Hydrating SPF 50+ sunscreen during the day.</div>
+        `;
+      } else if (type === 'oily') {
+        titleElem.innerText = "Routine for Oily Skin ✨";
+        htmlContent = `
+          <div class="routine-step"><strong>1. Cleanser:</strong> Salicylic acid or purifying gel cleanser.</div>
+          <div class="routine-step"><strong>2. Serum:</strong> Niacinamide serum to control excess sebum and tighten pores.</div>
+          <div class="routine-step"><strong>3. Moisturizer:</strong> Oil-free, lightweight gel moisturizer.</div>
+          <div class="routine-step"><strong>4. Sunscreen:</strong> Matte finish, gel-based sunscreen.</div>
+        `;
+      } else if (type === 'combination') {
+        titleElem.innerText = "Routine for Combination Skin 🌿";
+        htmlContent = `
+          <div class="routine-step"><strong>1. Cleanser:</strong> Gentle foaming cleanser that doesn't strip natural oils.</div>
+          <div class="routine-step"><strong>2. Serum:</strong> Balancing niacinamide or vitamin C serum.</div>
+          <div class="routine-step"><strong>3. Moisturizer:</strong> Light lotion (use slightly more on dry zones, less on T-zone).</div>
+          <div class="routine-step"><strong>4. Sunscreen:</strong> Lightweight fluid sunscreen.</div>
+        `;
+      } else {
+        titleElem.innerText = "Routine for Balanced Skin 🌸";
+        htmlContent = `
+          <div class="routine-step"><strong>1. Cleanser:</strong> Mild, everyday clinical cleanser.</div>
+          <div class="routine-step"><strong>2. Serum:</strong> Antioxidant Vitamin C serum for radiance.</div>
+          <div class="routine-step"><strong>3. Moisturizer:</strong> Standard hydrating daily cream.</div>
+          <div class="routine-step"><strong>4. Sunscreen:</strong> Broad-spectrum SPF 50 daily protection.</div>
+        `;
+      }
+      
+      contentElem.innerHTML = htmlContent;
+    }
+
+    function resetQuiz() {
+      document.getElementById('routine-result').style.display = 'none';
+      document.getElementById('quiz-box').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

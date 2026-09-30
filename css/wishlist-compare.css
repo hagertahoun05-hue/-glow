@@ -1,0 +1,24 @@
+.dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.card-section {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.compare-table th, .compare-table td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  text-align: left;
+}

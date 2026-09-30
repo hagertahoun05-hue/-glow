@@ -1,0 +1,91 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Vitamin C Serum",
+      "category": "Serums",
+      "skinType": "Oily",
+      "price": 24.99,
+      "oldPrice": 34.99,
+      "rating": 4.8,
+      "reviewsCount": 124,
+      "isOffer": true,
+      "isBestSeller": true,
+      "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400",
+      "description": "Brightens, evens skin tone and helps reduce dark spots with powerful Vitamin C.",
+      "ingredients": ["Vitamin C", "Hyaluronic Acid", "Niacinamide"],
+      "pao": "12M",
+      "howToUse": "Apply 2-3 drops to clean skin daily."
+    },
+    {
+      "id": "2",
+      "name": "Moisturizing Cream",
+      "category": "Moisturizers",
+      "skinType": "Dry",
+      "price": 18.99,
+      "oldPrice": 24.99,
+      "rating": 4.7,
+      "reviewsCount": 89,
+      "isOffer": true,
+      "isBestSeller": true,
+      "image": "https://images.unsplash.com/photo-1608248597260-8f9f743085f1?w=400",
+      "description": "Deeply hydrates and restores skin moisture barrier.",
+      "ingredients": ["Hyaluronic Acid", "Ceramides", "Aloe Vera"],
+      "pao": "6M",
+      "howToUse": "Smooth gently over face and neck morning and night."
+    },
+    {
+      "id": "3",
+      "name": "Sunscreen SPF 50",
+      "category": "Sunscreens",
+      "skinType": "Sensitive",
+      "price": 16.99,
+      "oldPrice": 22.99,
+      "rating": 4.6,
+      "reviewsCount": 210,
+      "isOffer": true,
+      "isBestSeller": false,
+      "image": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400",
+      "description": "Broad-spectrum protection without white cast.",
+      "ingredients": ["Zinc Oxide", "Titanium Dioxide"],
+      "pao": "12M",
+      "howToUse": "Apply liberally 15 minutes before sun exposure."
+    }
+  ],
+  "orders": [
+    {
+      "id": "1025",
+      "itemCount": 2,
+      "total": 50.00,
+      "status": "Pending",
+      "date": "2026-09-15"
+    },
+    {
+      "id": "1024",
+      "itemCount": 1,
+      "total": 24.99,
+      "status": "Processing",
+      "date": "2026-09-10"
+    },
+    {
+      "id": "1023",
+      "itemCount": 3,
+      "total": 76.50,
+      "status": "Shipped",
+      "date": "2026-09-01"
+    },
+    {
+      "id": "1022",
+      "itemCount": 1,
+      "total": 16.99,
+      "status": "Delivered",
+      "date": "2026-08-20"
+    }
+  ],
+  "user": {
+    "name": "Eman Osman",
+    "email": "eman@example.com",
+    "phone": "01012345678",
+    "address": "Monufia, Egypt"
+  }
+}
