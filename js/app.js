@@ -30,3 +30,32 @@ function updateCartBadge() {
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
 });
+
+// كود التبديل بين الوضع المضيء والداكن
+const themeToggleBtn = document.getElementById('themeToggle');
+const bodyElement = document.body;
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  bodyElement.classList.add('dark-mode');
+  document.documentElement.setAttribute('data-theme', 'dark');
+  if (themeToggleBtn) themeToggleBtn.textContent = '☀️ الوضع الفاتح';
+} else {
+  document.documentElement.setAttribute('data-theme', 'light');
+}
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', () => {
+    bodyElement.classList.toggle('dark-mode');
+    
+    if (bodyElement.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggleBtn.textContent = '☀️ الوضع الفاتح';
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeToggleBtn.textContent = '🌙 الوضع الداكن';
+    }
+  });
+}

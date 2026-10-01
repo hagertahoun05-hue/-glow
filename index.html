@@ -4,34 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GlowCraft | Clinical Skincare</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/home.css">
   <!-- FontAwesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     :root {
+      /* الوضع الفاتح (Light Mode - الافتراضي) */
       --bg-cream: #fbf9f6;
       --card-bg: #ffffff;
       --text-main: #2d3748;
       --text-muted: #718096;
-      --accent-green: #3b5343;
+      --accent-green: #374737;
       --border-color: #f0eae1;
-      --price-green: #276749;
+      --price-green: #36473f;
+      --hero-overlay-start: rgba(251, 249, 246, 0.95);
+      --hero-overlay-end: rgba(251, 249, 246, 0.4);
+      --btn-light-bg: rgba(255, 255, 255, 0.8);
+      --btn-light-border: #cbd5e0;
+      --cat-img-bg: #f2ece4;
+      --cat-img-border: #e2dcd2;
+      --quiz-banner-start: #f0e9dc;
+      --quiz-banner-end: #faeee3;
+      --product-img-bg: #f7f5f0;
+      --discount-bg: #e53e3e;
+      --footer-bg: #374737;
+      --footer-text: #ffffff;
     }
 
-    body {
+    /* الوضع الداكن بالأخضر الزيتوني الفخم والهادئ (Dark Mode) */
+    body.dark-mode {
+      --bg-cream: #37433c;      
+      --card-bg: #1e341e;      
+      --text-main: #f0f4f0;    
+      --text-muted: #91af91;    
+      --accent-green: #8fb38f;  
+      --border-color: #3e4a3e;  
+      --price-green: #36724d;
+      --hero-overlay-start: rgba(44, 62, 44, 0.95);
+      --hero-overlay-end: rgba(36, 41, 36, 0.6);
+      --btn-light-bg: rgba(5, 19, 5, 0.8);
+      --btn-light-border: #364e36;
+      --cat-img-bg: #a9f4a9;
+      --cat-img-border: #4e5e4e;
+      --quiz-banner-start: #1e341e;
+      --quiz-banner-end: rgba(36, 41, 36, 0.6);
+      --product-img-bg: #96b596;
+      --discount-bg: #1e341e;
+      --footer-bg: #1e341e;    
+      --footer-text: #f0f4f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden; /* يمنع أي زحف أفقي تماماً */
       background-color: var(--bg-cream);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: var(--text-main);
-      margin: 0;
-      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      width: 100%;
     }
 
     /* Navbar */
@@ -39,52 +82,84 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
+      padding: 20px 4%;
       background-color: var(--bg-cream);
+      transition: background-color 0.3s ease;
+      width: 100%;
     }
     .logo {
       font-size: 24px;
       font-weight: 700;
       letter-spacing: -0.5px;
+      color: var(--text-main);
     }
     .nav-links {
       display: flex;
-      gap: 30px;
+      gap: 25px;
     }
     .nav-links a {
       text-decoration: none;
       color: var(--text-main);
       font-size: 14px;
       font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+        color: var(--accent-green);
     }
     .nav-icons {
       display: flex;
-      gap: 20px;
+      gap: 15px;
+      align-items: center;
     }
     .nav-icons a {
       color: var(--text-main);
       text-decoration: none;
       font-size: 16px;
+      transition: color 0.3s ease;
+    }
+    .nav-icons a:hover {
+        color: var(--accent-green);
     }
 
-    /* Hero Section مطابق تماماً للصورة المطلوبة بخلفية منتجات العناية */
+    /* زر التبديل بين الوضعين */
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .theme-toggle-btn:hover {
+      background-color: var(--border-color);
+    }
+
+    /* Hero Section */
     .hero-section {
-      background-image: linear-gradient(to right, rgba(251, 249, 246, 0.95) 40%, rgba(251, 249, 246, 0.4) 100%), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqYOnex7vaTDNE-hUjpK9GSLGwnbJGnxqbPz9nK0NTlw&s=10');
+      background-image: linear-gradient(to right, var(--hero-overlay-start) 40%, var(--hero-overlay-end) 100%), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqYOnex7vaTDNE-hUjpK9GSLGwnbJGnxqbPz9nK0NTlw&s=10');
       background-size: cover;
       background-position: center;
       border-radius: 20px;
-      margin: 20px 40px;
-      padding: 60px 50px;
+      margin: 20px 4%;
+      padding: 60px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 20px rgba(3, 70, 25, 0.03);
+      transition: background-image 0.3s ease;
     }
     .hero-text h1 {
       font-size: 42px;
       line-height: 1.2;
       margin-bottom: 15px;
       font-weight: 700;
+      color: var(--text-main);
     }
     .hero-text p {
       color: var(--text-muted);
@@ -107,26 +182,39 @@
       border: none;
       display: inline-block;
       text-align: center;
+      transition: opacity 0.3s ease;
+    }
+    body.dark-mode .btn-dark {
+      color: #fff; 
+    }
+    .btn-dark:hover {
+        opacity: 0.9;
     }
     .btn-light {
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: var(--btn-light-bg);
       color: var(--text-main);
       padding: 12px 25px;
       border-radius: 8px;
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
-      border: 1px solid #cbd5e0;
+      border: 1px solid var(--btn-light-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .btn-light:hover {
+        background-color: var(--border-color);
     }
 
     /* Features Bar */
     .features-bar {
       display: flex;
       justify-content: space-around;
-      padding: 25px 0;
-      margin: 0 40px;
+      padding: 25px 20px;
+      margin: 0 4%;
       border-bottom: 1px solid var(--border-color);
       border-top: 1px solid var(--border-color);
+      gap: 20px;
+      transition: border-color 0.3s ease;
     }
     .feature-card {
       display: flex;
@@ -140,6 +228,7 @@
     .feature-card strong {
       font-size: 14px;
       display: block;
+      color: var(--text-main);
     }
     .feature-card p {
       font-size: 12px;
@@ -149,7 +238,7 @@
 
     /* Section Headers */
     .section-padding {
-      padding: 40px 40px;
+      padding: 40px 4%;
     }
     .section-header {
       display: flex;
@@ -160,12 +249,17 @@
     .section-header h2 {
       font-size: 22px;
       font-weight: 700;
+      color: var(--text-main);
     }
     .view-all-link {
       font-size: 13px;
       color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .view-all-link:hover {
+        color: var(--accent-green);
     }
 
     /* Products Grid */
@@ -173,6 +267,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
+      width: 100%;
     }
 
     .product-card {
@@ -184,17 +279,22 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 260px;
+      height: 280px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.02);
       text-decoration: none;
       color: inherit;
+      transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+    .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .badge-discount {
       position: absolute;
       top: 10px;
       left: 10px;
-      background-color: #e53e3e;
+      background-color: var(--discount-bg);
       color: white;
       padding: 2px 6px;
       font-size: 10px;
@@ -206,17 +306,23 @@
     .product-img-wrapper {
       width: 100%;
       height: 150px;
-      background-color: #f7f5f0;
+      background-color: var(--product-img-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      transition: background-color 0.3s ease;
     }
     
     .product-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    
+    body.dark-mode .product-img-wrapper img {
+      mix-blend-mode: multiply;
+      filter: brightness(0.9);
     }
 
     .product-info {
@@ -246,7 +352,7 @@
     .price-current {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-main);
+      color: var(--price-green);
     }
     
     .price-old {
@@ -257,9 +363,10 @@
 
     /* Shop By Category */
     .categories-grid {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       gap: 15px;
+      width: 100%;
     }
     .category-item {
       text-decoration: none;
@@ -267,38 +374,50 @@
       text-align: center;
       font-weight: 600;
       font-size: 13px;
+      transition: color 0.3s ease;
+    }
+    .category-item:hover {
+        color: var(--accent-green);
     }
     .cat-img-wrap {
-      width: 90px;
-      height: 90px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       overflow: hidden;
       margin: 0 auto 8px;
-      background-color: #f2ece4;
+      background-color: var(--cat-img-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #e2dcd2;
+      border: 1px solid var(--cat-img-border);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .cat-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+    body.dark-mode .cat-img-wrap img {
+         mix-blend-mode: multiply;
+         filter: brightness(0.9);
+    }
 
     /* Quiz Banner */
     .quiz-banner {
-      background: linear-gradient(135deg, #f0e9dc 0%, #faeee3 100%);
+      background: linear-gradient(135deg, var(--quiz-banner-start) 0%, var(--quiz-banner-end) 100%);
       border-radius: 16px;
       padding: 30px 40px;
-      margin: 0 40px 40px 40px;
+      margin: 0 4% 40px 4%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border: 1px solid var(--border-color);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .quiz-content h2 {
       font-size: 20px;
       margin-bottom: 8px;
+      color: var(--text-main);
     }
     .quiz-content p {
       color: var(--text-muted);
@@ -314,14 +433,17 @@
 
     /* Footer */
     .main-footer {
-      background-color: #3b5343;
-      color: #ffffff;
-      padding: 50px 40px 20px 40px;
+      background-color: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 50px 4% 20px 4%;
+      transition: background-color 0.3s ease;
     }
     .footer-content {
       display: flex;
       justify-content: space-between;
       margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 30px;
     }
     .footer-brand h3 {
       font-size: 20px;
@@ -331,6 +453,9 @@
       font-size: 12px;
       color: #cbd5e0;
       margin: 0;
+    }
+    body.dark-mode .footer-brand p {
+        color: #a3b1a3;
     }
     .footer-links h4, .footer-social h4 {
       font-size: 13px;
@@ -349,6 +474,13 @@
       color: #cbd5e0;
       text-decoration: none;
       font-size: 12px;
+      transition: color 0.3s ease;
+    }
+    body.dark-mode .footer-links ul li a {
+        color: #a3b1a3;
+    }
+    .footer-links ul li a:hover {
+        color: #fff;
     }
     .social-icons {
       display: flex;
@@ -365,6 +497,10 @@
       justify-content: center;
       text-decoration: none;
       font-size: 12px;
+      transition: background 0.3s ease;
+    }
+    .social-icons a:hover {
+        background: rgba(255,255,255,0.2);
     }
     .footer-bottom {
       display: flex;
@@ -374,11 +510,199 @@
       padding-top: 20px;
       font-size: 11px;
       color: #cbd5e0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    body.dark-mode .footer-bottom {
+        border-top-color: #3e4a3e;
+        color: #a3b1a3;
     }
     .payment-icons {
       display: flex;
       gap: 10px;
       font-size: 18px;
+    }
+
+    /* =========================================================
+        التجاوب الاحترافي (Responsive Media Queries) لصفحة الهوم
+       ========================================================= */
+
+    /* الأجهزة اللوحية والتابلت (أقل من 992px) */
+    @media (max-width: 992px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr); /* شبكة المنتجات تصبح عمودين */
+      }
+      .categories-grid {
+        grid-template-columns: repeat(3, 1fr); /* التصنيفات 3 في الصف */
+      }
+    }
+
+    /* الأجهزة اللوحية الأصغر والموبايل الكبير (أقل من 768px) */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+      }
+      .nav-links {
+        gap: 15px;
+        font-size: 13px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .features-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+      }
+      .quiz-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 25px 20px;
+      }
+      .quiz-img img {
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+      }
+      .footer-content {
+        flex-direction: column;
+        gap: 25px;
+      }
+    }
+
+    /* الهواتف الذكية الضيقة (أقل من 480px) */
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 28px;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn-dark, .btn-light {
+        width: 100%;
+      }
+      .products-grid {
+        grid-template-columns: 1fr; /* المنتجات تصبح عمود واحد بالكامل لضمان الوضوح */
+      }
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr); /* التصنيفات عمودين */
+      }
+      .nav-links {
+        gap: 10px;
+        font-size: 12px;
+      }
+    }
+
+    /* إخفاء شريط جوجل العلوي المزعج الذي يظهر عند الترجمة */
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+    body {
+      top: 0px !important;
+    }
+
+    /* =========================================================
+        تنسيق زر الترجمة المخصص (Modern Google Translate UI)
+       ========================================================= */
+
+    /* إخفاء أداة جوجل الافتراضية المزعجة وأيقوناتها القديمة بالكامل */
+    #google_translate_element, 
+    .goog-te-banner-frame, 
+    .goog-te-balloon-frame, 
+    .goog-logo-link, 
+    .goog-te-gadget span {
+      display: none !important;
+    }
+
+    .goog-te-gadget {
+      color: transparent !important;
+      font-size: 0px !important;
+    }
+
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+
+    /* حاوية زر الترجمة المخصص */
+    .custom-translate-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* تصميم الزر المخصص ليطابق باقي أزرار وأيقونات الموقع */
+    .custom-translate-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      outline: none;
+    }
+
+    .custom-translate-btn:hover {
+      background-color: var(--border-color);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    /* القائمة المندلسة المخفية/الظاهرة لاختيار اللغات */
+    .translate-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1000;
+      min-width: 130px;
+    }
+
+    .translate-dropdown-menu.show {
+      display: flex;
+    }
+
+    .translate-option {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      padding: 8px 12px;
+      text-align: left;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+      width: 100%;
+    }
+
+    .translate-option:hover {
+      background-color: var(--border-color);
+      color: var(--accent-green);
     }
   </style>
 </head>
@@ -387,21 +711,42 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="logo">GlowCraft</div>
+    
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
+
     <div class="nav-icons">
       <a href="products.html"><i class="fa-solid fa-magnifying-glass"></i></a>
       <a href="wishlist-compare.html"><i class="fa-regular fa-heart"></i></a>
       <a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a>
       <a href="profile.html"><i class="fa-regular fa-user"></i></a>
+
+      <div class="custom-translate-wrapper">
+        <button id="translateBtn" class="custom-translate-btn" title="Change Language">
+          <i class="fa-solid fa-globe"></i>
+          <span style="font-size: 12px;">Lang</span>
+        </button>
+        <div id="translateMenu" class="translate-dropdown-menu">
+          <button class="translate-option" onclick="changeLanguage('en')">English</button>
+          <button class="translate-option" onclick="changeLanguage('ar')">العربية</button>
+        </div>
+      </div>
+
+      <!-- زر تغيير الوضع (Dark/Light) -->
+      <button id="themeToggle" class="theme-toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
     </div>
+
+    <!-- العنصر المخفي الخاص بجوجل لتشغيل المحرك الخلفي للترجمة -->
+    <div id="google_translate_element" style="display:none;"></div>
   </header>
 
-  <!-- Hero Section بخلفية متطابقة -->
+  <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-text">
       <h1>Discover Your<br>Natural Glow</h1>
@@ -566,7 +911,7 @@
 
   <!-- Shop By Category -->
   <section class="section-padding">
-    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 20px;">Shop By Category</h2>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 20px; color: var(--text-main);">Shop By Category</h2>
     <div class="categories-grid">
       <a href="products.html?category=Cleansers" class="category-item">
         <div class="cat-img-wrap">
@@ -664,6 +1009,68 @@
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
+  <!-- JavaScript Scripts -->
+  <script>
+    // كود الجافاسكريبت للتبديل بين الوضع المضيء والداكن
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const bodyElement = document.body;
+    const icon = themeToggleBtn.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      bodyElement.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        bodyElement.classList.toggle('dark-mode');
+        
+        if (bodyElement.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'dark');
+          icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+          localStorage.setItem('theme', 'light');
+          icon.classList.replace('fa-sun', 'fa-moon');
+        }
+      });
+    }
+
+    // التحكم في ظهور وإخفاء قائمة اللغات عند الضغط على الزر
+    const translateBtn = document.getElementById('translateBtn');
+    const translateMenu = document.getElementById('translateMenu');
+
+    if (translateBtn && translateMenu) {
+      translateBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        translateMenu.classList.toggle('show');
+      });
+
+      // إغلاق القائمة عند الضغط في أي مكان خارجها
+      window.addEventListener('click', () => {
+        translateMenu.classList.remove('show');
+      });
+    }
+
+    // دالة تغيير اللغة عبر كوكي جوجل مترجم (Google Translate Cookie)
+    function changeLanguage(lang) {
+      const cookieName = 'googtrans';
+      document.cookie = `${cookieName}=/en/${lang};path=/;domain=` + document.domain;
+      location.reload();
+    }
+  </script>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,en',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>

@@ -8,6 +8,82 @@
   <link rel="stylesheet" href="css/products.css">
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* تنسيقات إضافية بسيطة خاصة بأزرار التحكم العلوية (الترجمة والدارك مود) لتتوافق مع التصميم الأصلي */
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--border-color, #ccc);
+      color: inherit;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .custom-translate-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    .custom-translate-btn {
+      background: none;
+      border: 1px solid var(--border-color, #ccc);
+      color: inherit;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      outline: none;
+    }
+    .translate-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 1000;
+      min-width: 130px;
+    }
+    .translate-dropdown-menu.show {
+      display: flex;
+    }
+    .translate-option {
+      background: none;
+      border: none;
+      color: #333;
+      padding: 8px 12px;
+      text-align: left;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .translate-option:hover {
+      background-color: #f0f0f0;
+      color: #374737;
+    }
+    .goog-te-banner-frame.skiptranslate, #google_translate_element {
+      display: none !important;
+    }
+    body {
+      top: 0px !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -25,7 +101,25 @@
       <a href="wishlist-compare.html"><i class="fa-regular fa-heart"></i></a>
       <a href="cart.html" class="cart-icon"><i class="fa-solid fa-bag-shopping"></i> <span id="cart-count">0</span></a>
       <a href="profile.html"><i class="fa-regular fa-user"></i></a>
+
+      <!-- زر الترجمة المخصص المتوافق مع الهوم -->
+      <div class="custom-translate-wrapper">
+        <button id="translateBtn" class="custom-translate-btn" title="Change Language">
+          <i class="fa-solid fa-globe"></i>
+          <span style="font-size: 12px;">Lang</span>
+        </button>
+        <div id="translateMenu" class="translate-dropdown-menu">
+          <button class="translate-option" onclick="changeLanguage('en')">English</button>
+          <button class="translate-option" onclick="changeLanguage('ar')">العربية</button>
+        </div>
+      </div>
+
+      <!-- زر الدارك مود -->
+      <button id="themeToggle" class="theme-toggle-btn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
     </div>
+    <div id="google_translate_element" style="display:none;"></div>
   </header>
 
   <!-- Header Banner -->
@@ -111,6 +205,64 @@
     </main>
   </div>
 
+  <!-- سكربتات التحكم (الوضع الداكن والترجمة وقراءة الذاكرة) -->
+  <script>
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const bodyElement = document.body;
+    const icon = themeToggleBtn.querySelector('i');
+
+    if (localStorage.getItem('theme') === 'dark') {
+      bodyElement.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      bodyElement.classList.toggle('dark-mode');
+      if (bodyElement.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    const translateBtn = document.getElementById('translateBtn');
+    const translateMenu = document.getElementById('translateMenu');
+
+    translateBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      translateMenu.classList.toggle('show');
+    });
+
+    window.addEventListener('click', () => {
+      translateMenu.classList.remove('show');
+    });
+
+    function changeLanguage(lang) {
+      localStorage.setItem('selectedLang', lang);
+      document.cookie = `googtrans=/en/${lang};path=/;domain=` + document.domain;
+      location.reload();
+    }
+  </script>
+
+  <!-- Google Translate Engine (لقراءة اللغة المخزنة وتطبيقها فوراً عند الدخول) -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      let storedLang = localStorage.getItem('selectedLang');
+      if (storedLang && !document.cookie.includes(`googtrans=/en/${storedLang}`)) {
+        document.cookie = `googtrans=/en/${storedLang};path=/;domain=` + document.domain;
+      }
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'ar,en',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- ملفات الـ JS الأصلية الخاصة بك -->
   <script src="js/app.js"></script>
   <script src="js/products.js"></script>
 </body>
